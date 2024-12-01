@@ -16,7 +16,7 @@ function JournalEntry() {
     if (id) {
       const fetchEntry = async () => {
         try {
-          const response = await axios.get(`http://localhost:3000/api/posts/${id}`, {
+          const response = await axios.get(`${process.env.VERCEL_URL}/api/posts/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setTitle(response.data.title);
@@ -71,13 +71,13 @@ function JournalEntry() {
       const postData = { title, content, weather };
       if (id) {
         await axios.put(
-            `http://localhost:3000/api/posts/${id}`,
+            `${process.env.VERCEL_URL}/api/posts/${id}`,
             postData,
             { headers: { Authorization: `Bearer ${token}` } }
         );
       } else {
         await axios.post(
-            'http://localhost:3000/api/posts',
+            `${process.env.VERCEL_URL}/api/posts`,
             postData,
             { headers: { Authorization: `Bearer ${token}` } }
         );

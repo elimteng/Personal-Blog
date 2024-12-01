@@ -13,7 +13,7 @@ function Details() {
     useEffect(() => {
         const fetchEntry = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/posts/public/${id}`);
+                const response = await axios.get(`${process.env.VERCEL_URL}/api/posts/public/${id}`);
                 setEntry(response.data);
             } catch (error) {
                 console.error('Error fetching entry:', error);
@@ -22,7 +22,7 @@ function Details() {
 
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/comments/post/${id}`, {
+                const response = await axios.get(`${process.env.VERCEL_URL}/api/comments/post/${id}`, {
                     headers: token ? { Authorization: `Bearer ${token}` } : {}
                 });
                 setComments(response.data);
@@ -53,7 +53,7 @@ function Details() {
     const handleDeleteComment = async (commentId) => {
         try {
             await axios.delete(
-                `http://localhost:3000/api/comments/post/${id}/comment/${commentId}`,
+                `${process.env.VERCEL_URL}/api/comments/post/${id}/comment/${commentId}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setComments(comments.filter(comment => comment._id !== commentId));

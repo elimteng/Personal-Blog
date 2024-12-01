@@ -11,7 +11,7 @@ function Profile() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/users/profile', {
+                const response = await axios.get(`${process.env.VERCEL_URL}/api/users/profile`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUsername(response.data.username);
@@ -26,7 +26,7 @@ function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:3000/api/users/profile', {
+            const response = await axios.put(`${process.env.VERCEL_URL}/api/users/profile`, {
                 username
             }, {
                 headers: { Authorization: `Bearer ${token}` }

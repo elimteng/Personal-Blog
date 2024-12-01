@@ -11,7 +11,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/users/register', {
+      await axios.post(`${process.env.VERCEL_URL}/api/users/register', {
         username,
         password
       });
