@@ -11,18 +11,24 @@ const generateToken = (id) => {
 
 export const registerUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-    const userExists = await User.findOne({ $or: [{ username }, { email }] });
+    const { username, password } = req.body;
+    console.log('Registering user:', { username, password });
+
+    const userExists = await User.findOne({ username });
+    console.log('User exists:', userExists);
 
     if (userExists) {
-      return res.status(400).json({ message: 'Username or email already exists' });
+      return res.status(400).json({ message: 'Username already exists' });
     }
 
-    await User.create({ username, email, password });
+    const user = await User.create({ username, password });
+    console.log('User created:', user);
+
     res.status(201).json({
       message: 'User registered successfully'
     });
   } catch (error) {
+    console.error('Error registering user:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -30,21 +36,24 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log('Logging in user:', { username, password }); // Add this line for logging
+
     const user = await User.findOne({ username });
+    console.log('User found:', user); // Add this line for logging
 
     if (user && (await user.matchPassword(password))) {
       res.json({
         token: generateToken(user._id),
         user: {
           id: user._id,
-          username: user.username,
-          email: user.email
+          username: user.username
         }
       });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
+    console.error('Error logging in user:', error); // Add this line for logging
     res.status(500).json({ message: error.message });
   }
 };
