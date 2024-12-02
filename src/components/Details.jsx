@@ -13,7 +13,7 @@ function Details() {
     useEffect(() => {
         const fetchEntry = async () => {
             try {
-                const response = await axios.get(`${process.env.VERCEL_URL}/api/posts/public/${id}`);
+                const response = await axios.get(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/posts/public/${id}`);
                 setEntry(response.data);
             } catch (error) {
                 console.error('Error fetching entry:', error);
@@ -22,7 +22,7 @@ function Details() {
 
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`${process.env.VERCEL_URL}/api/comments/post/${id}`, {
+                const response = await axios.get(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/comments/post/${id}`, {
                     headers: token ? { Authorization: `Bearer ${token}` } : {}
                 });
                 setComments(response.data);

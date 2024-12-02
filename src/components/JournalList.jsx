@@ -15,7 +15,7 @@ function JournalList() {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const url = user ? `${process.env.VERCEL_URL}/api/posts` : `${process.env.VERCEL_URL}/api/posts/all`;
+        const url = user ? `${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/posts` : `${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/posts/all`;
         const response = await axios.get(url, {
           headers: user ? { Authorization: `Bearer ${token}` } : {},
           params: { search }
@@ -31,7 +31,7 @@ function JournalList() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${process.env.VERCEL_URL}/api/posts/${entryToDelete}`, {
+      await axios.delete(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/posts/${entryToDelete}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setEntries(entries.filter(entry => entry._id !== entryToDelete));
