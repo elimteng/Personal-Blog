@@ -39,7 +39,7 @@ function Details() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                `http://localhost:3000/api/comments/post/${id}`,
+                `${process.env.VERCEL_URL}/api/comments/post/${id}`,
                 { content: newComment },
                 { headers: token ? { Authorization: `Bearer ${token}` } : {} }
             );
