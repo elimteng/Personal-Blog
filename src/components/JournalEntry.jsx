@@ -16,7 +16,7 @@ function JournalEntry() {
     if (id) {
       const fetchEntry = async () => {
         try {
-          const response = await axios.get(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/posts/${id}`, {
+          const response = await axios.get(`/api/posts/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setTitle(response.data.title);

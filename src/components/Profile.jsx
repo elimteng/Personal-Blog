@@ -11,7 +11,7 @@ function Profile() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await axios.get(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/users/profile`, {
+                const response = await axios.get(`/api/users/profile`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUsername(response.data.username);
@@ -26,7 +26,7 @@ function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/users/profile`, {
+            const response = await axios.put(`/api/users/profile`, {
                 username
             }, {
                 headers: { Authorization: `Bearer ${token}` }

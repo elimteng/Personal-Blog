@@ -11,7 +11,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.APPLICATIONINSIGHTS_CONNECTION_STRING}/api/users/register`, {
+      await axios.post(`/api/users/register`, {
         username,
         password
       });
