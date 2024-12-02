@@ -23,8 +23,9 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
+const PORT = process.env.VERCEL_URL;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running at ${PORT}`);
 });
